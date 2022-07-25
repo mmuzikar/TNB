@@ -23,10 +23,12 @@ public final class Attachments {
     }
 
     static void startTestClass(String testClass) {
+        LOG.debug("Setting current test class as {}", testClass);
         currentTestClass = testClass;
     }
 
     static void startTestCase(String testCase) {
+        LOG.debug("Setting current test case as {}#{}", currentTestClass, testCase);
         currentTestCase = testCase;
     }
 
@@ -45,7 +47,9 @@ public final class Attachments {
     }
 
     private static void createAttachments(List<Path> attachments, String folder) {
+        LOG.debug("Creating attachments for test case for test case {}#{}", currentTestClass, currentTestCase);
         if (attachments.isEmpty()) {
+            LOG.debug("No attachments registered, skipping creating attachments for test case {}#{}", currentTestClass, currentTestCase);
             return;
         }
 
@@ -56,6 +60,8 @@ public final class Attachments {
             for (Path p : attachments) {
                 Files.copy(p, testCaseDir.resolve(p.getFileName()));
             }
+
+            LOG.debug("Created attachments folder {} with files {}", testCaseDir.toAbsolutePath(), attachments);
         } catch (IOException e) {
             LOG.error("Couldn't create an attachment for test case {}#{}", currentTestClass, currentTestCase, e);
         }
