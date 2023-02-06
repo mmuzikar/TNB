@@ -81,4 +81,8 @@ public final class ServiceFactory {
             LOG.warn("Exception thrown while undeploying service", e);
         }
     }
+
+    public static <C extends ServiceConfig, S extends Service<C>> void createService(Class<S> clazz, Consumer<C> configConsumer) {
+
+    }
 }

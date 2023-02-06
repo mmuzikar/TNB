@@ -4,13 +4,14 @@ import software.tnb.common.account.AccountFactory;
 import software.tnb.common.deployment.WithDockerImage;
 import software.tnb.common.service.Service;
 import software.tnb.db.cassandra.account.CassandraAccount;
+import software.tnb.db.cassandra.config.CassandraConfig;
 import software.tnb.db.cassandra.validation.CassandraValidation;
 
 import com.datastax.oss.driver.api.core.CqlSession;
 
 import java.util.Map;
 
-public abstract class Cassandra implements Service, WithDockerImage {
+public abstract class Cassandra implements Service<CassandraConfig>, WithDockerImage {
 
     public static final int CASSANDRA_PORT = 9042;
 
